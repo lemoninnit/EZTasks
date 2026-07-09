@@ -4,7 +4,7 @@ import Card from '../components/Card'
 import Button from '../components/Button'
 import { useAuth } from '../contexts/AuthContext'
 import { updateCurrentUser, deleteCurrentUser } from '../api/users'
-import { Trash2 } from 'lucide-react'
+import { Trash2, UserCircle } from 'lucide-react'
 
 export default function Profile() {
   const { user, updateUser } = useAuth()
@@ -79,10 +79,32 @@ export default function Profile() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px' }}>
-        <h1 style={{ fontWeight: 800, fontSize: 28, color: '#0f172a', marginBottom: 24 }}>Profile</h1>
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: 24 }}>
+        {/* Page Header */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 48,
+            height: 48,
+            borderRadius: 14,
+            background: 'linear-gradient(135deg, #3f5d2a, #2d4a1b)',
+            boxShadow: '0 4px 12px rgba(63, 93, 42, 0.25)'
+          }}>
+            <UserCircle size={22} color="#fff" />
+          </div>
+          <div>
+            <h1 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', margin: 0, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+              Profile
+            </h1>
+            <p style={{ fontSize: 14, color: '#64748b', margin: 0, fontWeight: 500 }}>
+              Manage your account settings
+            </p>
+          </div>
+        </div>
         
-        <Card style={{ marginBottom: 24 }}>
+        <Card>
           <form onSubmit={handleUpdate} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {error && (
               <div style={{ 

@@ -16,25 +16,47 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.appdevg6.yinandyang.claritask.service.TaskDeadlineAnnouncementService;
+
 @RestController
 @RequestMapping("/api/announcements")
 public class AnnouncementController {
     private final AnnouncementRepository repo;
     private final UserRepository users;
     private final TaskRepository tasks;
+    private final TaskDeadlineAnnouncementService deadlineService;
 
-    public AnnouncementController(AnnouncementRepository repo, UserRepository users, TaskRepository tasks) {
+    public AnnouncementController(AnnouncementRepository repo, UserRepository users, TaskRepository tasks, TaskDeadlineAnnouncementService deadlineService) {
         this.repo = repo;
         this.users = users;
         this.tasks = tasks;
+        this.deadlineService = deadlineService;
     }
 
     @GetMapping
     public List<AnnouncementDto> all() {
-        // Filter out expired notifications
+        // Run the deadline service to generate any new reminders in real-time
+        try {
+            deadlineService.postDeadlineAnnouncements();
+        } catch (Exception e) {
+            System.err.println("Failed to run deadline service: " + e.getMessage());
+        }
+
+        Long userId = SecurityUtil.getCurrentUserId();
         LocalDateTime now = LocalDateTime.now();
+
         return repo.findAllByOrderByCreatedAtDesc().stream()
+                .filter(ann -> ann.getUser() != null && ann.getUser().getUserId().equals(userId))
                 .filter(ann -> ann.getExpiresAt() == null || ann.getExpiresAt().isAfter(now))
+                .filter(ann -> {
+                    String type = ann.getNotificationType();
+                    return "task_overdue".equals(type) ||
+                           "task_due_week".equals(type) ||
+                           "task_due_day".equals(type) ||
+                           "task_due_24h_window".equals(type) ||
+                           "task_due_soon".equals(type);
+                })
+                .filter(ann -> ann.getTask() == null || !"completed".equalsIgnoreCase(ann.getTask().getStatus()))
                 .map(DtoMapper::toDto)
                 .collect(Collectors.toList());
     }

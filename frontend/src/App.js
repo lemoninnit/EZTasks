@@ -8,7 +8,6 @@ import Calendar from './pages/Calendar';
 import Tasks from './pages/Tasks';
 import Profile from './pages/Profile';
 import Announcements from './pages/Announcements';
-import CreateAnnouncement from './pages/CreateAnnouncement';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
@@ -47,11 +46,6 @@ export default function App() {
         <Route path="/announcements" element={
           <ProtectedRoute>
             <Announcements />
-          </ProtectedRoute>
-        } />
-        <Route path="/announcements/create" element={
-          <ProtectedRoute>
-            <CreateAnnouncement />
           </ProtectedRoute>
         } />
         <Route path="/profile" element={

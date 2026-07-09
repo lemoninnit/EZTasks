@@ -26,6 +26,14 @@ public class FixCategoryConstraint {
         }
         
         try {
+            String dbName = jdbcTemplate.execute((org.springframework.jdbc.core.ConnectionCallback<String>) connection -> connection.getMetaData().getDatabaseProductName());
+            System.out.println("Database product name: " + dbName);
+            
+            if (dbName == null || !dbName.toLowerCase().contains("mysql")) {
+                System.out.println("Not using MySQL, skipping MySQL-specific category constraint fix.");
+                return;
+            }
+            
             System.out.println("Checking category table constraints...");
             
             // Get all indexes on the categories table

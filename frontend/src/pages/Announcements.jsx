@@ -60,28 +60,22 @@ export default function Announcements() {
 
   const getNotificationIcon = (type) => {
     switch(type) {
-      case 'task_completed': return <CheckCircle2 size={20} color="#10b981" />
-      case 'task_deleted': return <Trash2 size={20} color="#ef4444" />
-      case 'task_updated': return <Edit2 size={20} color="#3b82f6" />
-      case 'task_created': return <Plus size={20} color="#3b82f6" />
-      case 'category_created': return <FolderPlus size={20} color="#8b5cf6" />
-      case 'category_deleted': return <FolderMinus size={20} color="#ef4444" />
-      case 'task_overdue': return <AlertCircle size={20} color="#f59e0b" />
+      case 'task_overdue': return <AlertCircle size={20} color="#ef4444" />
+      case 'task_due_day':
+      case 'task_due_24h_window':
       case 'task_due_soon': return <Clock size={20} color="#f59e0b" />
+      case 'task_due_week': return <Clock size={20} color="#3b82f6" />
       default: return <Bell size={20} color="#6b7280" />
     }
   }
 
   const getNotificationColor = (type) => {
     switch(type) {
-      case 'task_completed': return { bg: '#d1fae5', border: '#10b981', text: '#065f46' }
-      case 'task_deleted': return { bg: '#fee2e2', border: '#ef4444', text: '#991b1b' }
-      case 'task_updated': return { bg: '#dbeafe', border: '#3b82f6', text: '#1e40af' }
-      case 'task_created': return { bg: '#dbeafe', border: '#3b82f6', text: '#1e40af' }
-      case 'category_created': return { bg: '#f3e8ff', border: '#8b5cf6', text: '#6b21a8' }
-      case 'category_deleted': return { bg: '#fee2e2', border: '#ef4444', text: '#991b1b' }
-      case 'task_overdue': return { bg: '#fef3c7', border: '#f59e0b', text: '#92400e' }
+      case 'task_overdue': return { bg: '#fee2e2', border: '#ef4444', text: '#991b1b' }
+      case 'task_due_day':
+      case 'task_due_24h_window':
       case 'task_due_soon': return { bg: '#fef3c7', border: '#f59e0b', text: '#92400e' }
+      case 'task_due_week': return { bg: '#dbeafe', border: '#3b82f6', text: '#1e40af' }
       default: return { bg: '#f3f4f6', border: '#6b7280', text: '#374151' }
     }
   }
@@ -116,24 +110,37 @@ export default function Announcements() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-          <div>
-            <h1 style={{ fontWeight: 800, fontSize: 28, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 8, margin: '0 0 8px 0' }}>
-              <Bell size={28} /> Notification Center
-            </h1>
-            <p style={{ color: '#6b7280', margin: 0, fontSize: 14 }}>Stay updated with all your task and system events</p>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: 24 }}>
+
+        {/* Page Header */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 48,
+            height: 48,
+            borderRadius: 14,
+            background: 'linear-gradient(135deg, #3f5d2a, #2d4a1b)',
+            boxShadow: '0 4px 12px rgba(63, 93, 42, 0.25)'
+          }}>
+            <Bell size={22} color="#fff" />
           </div>
-          <Button onClick={() => navigate('/announcements/create')}>
-            <Plus size={18} style={{ marginRight: '8px' }} /> Create Announcement
-          </Button>
+          <div>
+            <h1 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', margin: 0, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+              Task Reminders
+            </h1>
+            <p style={{ fontSize: 14, color: '#64748b', margin: 0, fontWeight: 500 }}>
+              Reminders for your upcoming and missed task deadlines
+            </p>
+          </div>
         </div>
 
         {notifications.length === 0 ? (
           <Card>
             <div style={{ textAlign: 'center', padding: '48px', color: '#6b7280' }}>
               <Bell size={48} style={{ margin: '0 auto 16px', opacity: 0.3 }} />
-              <p style={{ fontSize: 16, margin: 0 }}>No notifications yet.</p>
+              <p style={{ fontSize: 16, margin: 0 }}>No task reminders yet.</p>
             </div>
           </Card>
         ) : (

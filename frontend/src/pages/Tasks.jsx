@@ -8,7 +8,7 @@ import TaskItem from '../components/TaskItem'
 import { getTasks, getTask, createTask, updateTask, deleteTask, updateTaskStatus } from '../api/tasks'
 import { getCategories, createCategory } from '../api/categories'
 import { useAuth } from '../contexts/AuthContext'
-import { Plus, ArrowLeft } from 'lucide-react'
+import { Plus, ArrowLeft, ListTodo } from 'lucide-react'
 
 export default function Tasks() {
   const { id } = useParams()
@@ -197,35 +197,55 @@ export default function Tasks() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, gap: 16, flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, minWidth: 200 }}>
-            <h1 style={{ fontWeight: 800, fontSize: 28, color: '#0f172a', margin: '0 0 8px 0' }}>
-              Tasks
-            </h1>
-            <p style={{ color: '#64748b', margin: 0, fontSize: 14 }}>
-              Manage your tasks and assignments
-            </p>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: 24 }}>
+        {/* Page Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 48,
+              height: 48,
+              borderRadius: 14,
+              background: 'linear-gradient(135deg, #3f5d2a, #2d4a1b)',
+              boxShadow: '0 4px 12px rgba(63, 93, 42, 0.25)'
+            }}>
+              <ListTodo size={22} color="#fff" />
+            </div>
+            <div>
+              <h1 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', margin: 0, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+                Tasks
+              </h1>
+              <p style={{ fontSize: 14, color: '#64748b', margin: 0, fontWeight: 500 }}>
+                Manage your tasks and assignments
+              </p>
+            </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search tasks by title, description, or category"
+              placeholder="Search tasks..."
               style={{
-                width: 260,
+                width: 240,
                 maxWidth: '100%',
-                padding: '10px 12px',
+                padding: '10px 14px',
                 borderRadius: 10,
-                border: '1px solid #e5e7eb',
+                border: '1px solid #e2e8f0',
                 background: '#fff',
-                boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
+                fontSize: 14,
+                boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+                outline: 'none',
+                transition: 'border-color 0.2s'
               }}
+              onFocus={(e) => e.target.style.borderColor = '#3f5d2a'}
+              onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
             />
             {!showForm && (
-              <Button onClick={() => setShowForm(true)}>
-                <Plus size={18} style={{ marginRight: '8px' }} /> Create Task
+              <Button onClick={() => setShowForm(true)} style={{ fontSize: '14px', padding: '11px 22px', borderRadius: 12 }}>
+                <Plus size={17} /> Create Task
               </Button>
             )}
           </div>

@@ -8,7 +8,7 @@ import TasksCard from '../components/TasksCard'
 import { getTasks, updateTaskStatus } from '../api/tasks'
 import { getCategories, createCategory } from '../api/categories'
 import { useAuth } from '../contexts/AuthContext'
-import { Plus } from 'lucide-react'
+import { Plus, LayoutDashboard } from 'lucide-react'
 import Button from '../components/Button'
 
 export default function Dashboard() {
@@ -129,9 +129,12 @@ export default function Dashboard() {
   if (loading) {
     return (
       <AppLayout>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ textAlign: 'center', padding: '48px 24px', color: '#64748b' }}>
-            Loading dashboard...
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px' }}>
+          <div style={{ textAlign: 'center', padding: '80px 24px' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 56, height: 56, borderRadius: 16, background: '#e6f4ea', marginBottom: 16 }}>
+              <LayoutDashboard size={28} color="#3f5d2a" />
+            </div>
+            <div style={{ color: '#64748b', fontSize: 15, fontWeight: 500 }}>Loading dashboard...</div>
           </div>
         </div>
       </AppLayout>
@@ -140,53 +143,55 @@ export default function Dashboard() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px' }}>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          marginBottom: 24
-        }}>
-          <div>
-            <h1 style={{
-              fontSize: 32,
-              fontWeight: 800,
-              color: '#0f172a',
-              margin: '0 0 8px 0',
-              lineHeight: 1.2
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: 24 }}>
+
+        {/* Page Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 48,
+              height: 48,
+              borderRadius: 14,
+              background: 'linear-gradient(135deg, #3f5d2a, #2d4a1b)',
+              boxShadow: '0 4px 12px rgba(63, 93, 42, 0.25)'
             }}>
-              Dashboard
-            </h1>
-            <p style={{
-              fontSize: 15,
-              color: '#64748b',
-              margin: 0
-            }}>
-              Stay on top of your assignments
-            </p>
+              <LayoutDashboard size={22} color="#fff" />
+            </div>
+            <div>
+              <h1 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', margin: 0, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+                Dashboard
+              </h1>
+              <p style={{ fontSize: 14, color: '#64748b', margin: 0, fontWeight: 500 }}>
+                Stay on top of your assignments
+              </p>
+            </div>
           </div>
-          <Button onClick={() => navigate('/tasks/create')} style={{ fontSize: '14px', padding: '10px 20px' }}>
-            <Plus size={18} style={{ marginRight: '8px' }} /> Create Task
+          <Button onClick={() => navigate('/tasks/create')} style={{ fontSize: '14px', padding: '11px 22px', borderRadius: 12 }}>
+            <Plus size={17} /> Create Task
           </Button>
         </div>
-        
+
+        {/* Welcome Banner */}
         <WelcomeCard 
-          greeting={`Welcome ${userName} 👋`}
+          greeting={`Welcome, ${userName} 👋`}
           taskCount={todayTasks.length}
         />
 
-        <div style={{ marginBottom: 24 }}>
-          <StatsCardRow 
-            completed={completed} 
-            pending={pending} 
-            inProgress={inProgress} 
-            total={total} 
-          />
-        </div>
+        {/* Stats Row */}
+        <StatsCardRow 
+          completed={completed} 
+          pending={pending} 
+          inProgress={inProgress} 
+          total={total} 
+        />
 
+        {/* Categories + Tasks Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: window.innerWidth < 1024 ? '1fr' : 'minmax(320px, 400px) 1fr',
+          gridTemplateColumns: window.innerWidth < 1024 ? '1fr' : 'minmax(300px, 380px) 1fr',
           gap: 24,
           alignItems: 'start'
         }}>
@@ -197,7 +202,6 @@ export default function Dashboard() {
             onAddCategory={handleAddCategory}
             onCategoryDeleted={handleCategoryDeleted}
           />
-          
           <TasksCard tasks={visibleTasks} loading={loading} onStatusChange={handleStatusChange} />
         </div>
       </div>

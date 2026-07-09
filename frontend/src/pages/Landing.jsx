@@ -132,8 +132,8 @@ export default function Landing() {
             <div style={s.fDesc}>Create, edit, and track tasks with status and due dates.</div>
           </div>
           <div style={s.feature} onMouseEnter={handleFeatureHover} onMouseLeave={handleFeatureLeave}>
-            <div style={s.fTitle}>Notification Center</div>
-            <div style={s.fDesc}>Get real-time notifications for all task and system events.</div>
+            <div style={s.fTitle}>Task Reminders</div>
+            <div style={s.fDesc}>Get real-time reminders for upcoming and missed task deadlines.</div>
           </div>
           <div style={s.feature} onMouseEnter={handleFeatureHover} onMouseLeave={handleFeatureLeave}>
             <div style={s.fTitle}>Smart Calendar</div>

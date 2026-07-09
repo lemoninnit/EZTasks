@@ -23,6 +23,12 @@ public class DatabaseFixer {
     @PostConstruct
     public void fixCategoryConstraints() {
         try {
+            String dbName = jdbcTemplate.execute((org.springframework.jdbc.core.ConnectionCallback<String>) connection -> connection.getMetaData().getDatabaseProductName());
+            if (dbName == null || !dbName.toLowerCase().contains("mysql")) {
+                System.out.println("Not using MySQL, skipping MySQL-specific database constraint fix in DatabaseFixer.");
+                return;
+            }
+
             // Check what indexes exist
             List<Map<String, Object>> indexes = jdbcTemplate.queryForList(
                 "SELECT INDEX_NAME FROM INFORMATION_SCHEMA.STATISTICS " +
