@@ -1,12 +1,23 @@
 # EZTasks
 
-**School Task & Reminder Manager** — A full-stack web application for managing tasks, deadlines, and smart task-deadline reminders.
+**Task Management Reimagined** — A premium, full-stack web application designed for modern teams. Built for speed, clarity, and precision, EZTasks offers a beautiful glassmorphism UI paired with robust backend task management.
 
-> 🟢 Database is hosted on **Neon PostgreSQL** (cloud). No local database installation required.
+> 🟢 **Database:** Hosted on **Neon PostgreSQL** (cloud). No local database installation required!
 
 ---
 
-## 🚀 Quick Start
+## ✨ Features & Capabilities
+
+- **Premium UI/UX Design** — Completely modernized with a dark glassmorphism aesthetic, smooth `framer-motion` page transitions, and scroll-based micro-animations.
+- **Dynamic Task Management** — Create, edit, and organize tasks with precision. Track status from Pending → In Progress → Completed.
+- **Smart Deadlines & Reminders** — Automatic deadline reminders and visual timelines. Stay ahead of overdue, due today, and due this week items.
+- **Visual Calendar** — Monthly grid view with color-coded task deadline markers.
+- **Assignment Analytics** — Dashboard metrics (Completed, Pending, In-Progress) presented beautifully.
+- **Secure Authentication** — JWT-secured sessions, encrypted data, and protected routing.
+
+---
+
+## 🚀 Quick Start Guide
 
 ### Prerequisites
 
@@ -14,109 +25,75 @@
 |-------------|---------|
 | Node.js | 18+ |
 | Java (JDK) | 17+ |
-| Maven | Bundled via `mvnw` wrapper |
+| Maven | (Bundled via `mvnw` wrapper) |
 
 ---
 
-### 1. Clone the Repository
+### 1. Start the Backend (Spring Boot)
 
-```bash
-git clone https://github.com/lemoninnit/EZTasks.git
-cd EZTasks
-```
-
----
-
-### 2. Start the Backend
-
-The backend connects to a Neon PostgreSQL cloud database. No local database setup is needed — credentials are already configured in `application.properties`.
+The backend connects directly to a Neon PostgreSQL cloud database. Credentials are pre-configured, meaning **zero database setup is required** on your end.
 
 ```bash
 cd backend
 ./mvnw spring-boot:run
 ```
 
-> **Windows users:** Use `mvnw.cmd spring-boot:run` if the above doesn't work.
-
-The backend API will start at: **`http://localhost:8080`**
-
-> Tables are created automatically on first run via JPA/Hibernate (`ddl-auto=update`).
+> **Windows users:** Use `mvnw.cmd spring-boot:run`
+> The API will launch on **`http://localhost:8080`**. Tables are automatically generated via JPA/Hibernate.
 
 ---
 
-### 3. Start the Frontend
+### 2. Start the Frontend (React + Vite)
 
-Open a **new terminal** in the project root:
+Open a **new terminal window** in the project root:
 
 ```bash
 cd frontend
 npm install
-npm start
+npm run dev
 ```
 
-The React app will start at: **`http://localhost:3000`**
+> The React app will launch instantly via Vite at: **`http://localhost:5173`** (or `3000` depending on Vite configuration). Check the terminal output for the exact URL.
 
 ---
 
-### 4. Open the App
+### 3. Usage
 
-1. Go to **`http://localhost:3000`**
-2. Click **Sign Up** to create an account
-3. Log in and start managing your tasks
-
----
-
-## 🔧 Configuration
-
-### Backend — `backend/src/main/resources/application.properties`
-
-| Property | Value |
-|----------|-------|
-| Database | Neon PostgreSQL (cloud) |
-| Backend port | `8080` |
-| JPA DDL mode | `update` (auto-creates tables) |
-| JWT expiry | 24 hours (`86400000 ms`) |
-
-> ⚠️ The database credentials in `application.properties` are shared for this project. For production deployments, move sensitive values to environment variables.
-
-### Frontend
-
-| Setting | Value |
-|---------|-------|
-| Dev server port | `3000` |
-| API base URL | `http://localhost:8080` (configured in `src/api/`) |
+1. Open the frontend URL in your browser.
+2. Experience the new scroll-animated landing page.
+3. Click **Start Your Free Trial** or **Get Started** to create an account.
+4. Log in and explore the Dashboard, Calendar, and Tasks features.
 
 ---
 
-## ✨ Features
+## 🧱 Tech Stack
 
-- **Task Management** — Create, edit, delete, and track tasks with due dates and times
-- **Calendar View** — Visual monthly calendar with color-coded task deadlines by status
-- **Categories** — Organize tasks with custom categories and filter views
-- **Task Reminders** — Automatic deadline reminders (overdue / due today / due this week) replacing manual announcements
-- **Dashboard** — Stats overview (completed, pending, in-progress, total) + welcome banner
-- **User Profiles** — Update account name, email, or delete account
-- **Secure Authentication** — JWT-based login and protected routes
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | React 18, Vite, Framer Motion (Animations), Lucide React (Icons), Vanilla CSS |
+| **Backend** | Java 17, Spring Boot 3.x, Spring Security, Spring Data JPA |
+| **Database** | Neon PostgreSQL (Cloud-hosted) |
+| **Auth** | JWT (JSON Web Tokens) with BCrypt hashing |
 
 ---
 
 ## 📁 Project Structure
 
-```
+```text
 EZTasks/
-├── backend/                        # Spring Boot 3 REST API (Java 17)
+├── backend/                        # Spring Boot REST API
 │   ├── src/main/java/              # Controllers, Services, Entities
 │   └── src/main/resources/
-│       └── application.properties  # Database & JWT config
+│       └── application.properties  # Cloud DB & JWT Config
 │
-└── frontend/                       # React 18 (Create React App)
-    ├── public/
+└── frontend/                       # React 18 (Vite)
+    ├── index.html
     └── src/
-        ├── api/                    # Axios API clients
-        ├── components/             # Reusable UI components
-        ├── contexts/               # Auth context (JWT)
-        ├── layouts/                # AppLayout with sidebar + header
-        └── pages/                  # Dashboard, Tasks, Calendar, etc.
+        ├── api/                    # Axios API client integrations
+        ├── components/             # Reusable UI (TextTicker, Cards, Headers)
+        ├── contexts/               # JWT Auth Context
+        ├── layouts/                # AppLayout (Sidebar) & AuthLayout
+        └── pages/                  # Landing, Dashboard, Tasks, Calendar, etc.
 ```
 
 ---
@@ -125,89 +102,8 @@ EZTasks/
 
 | Problem | Fix |
 |---------|-----|
-| Port 8080 already in use | Change `server.port` in `application.properties` |
-| `mvnw` permission denied (Mac/Linux) | Run `chmod +x mvnw` then retry |
-| Frontend won't start | Run `npm install` inside `frontend/` |
-| `npm start` opens wrong port | Set `PORT=3000` environment variable or check `.env` |
-| Backend fails to connect to DB | Ensure you have internet access (Neon is a cloud DB) |
-| CORS error in browser | Confirm backend is running on port `8080` |
-
----
-
-## 🧱 Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18, React Router, Lucide Icons |
-| Backend | Spring Boot 3.5, Spring Security, Spring Data JPA |
-| Database | Neon PostgreSQL (cloud-hosted) |
-| Auth | JWT (JSON Web Tokens) with BCrypt password hashing |
-| ORM | Hibernate / JPA |
-
----
-
-## 📋 Feature Checklist
-
-### Frontend
-
-| Feature | Status |
-|---------|--------|
-| **Authentication** | |
-| Login & Signup pages | ✅ |
-| JWT token management | ✅ |
-| Protected routes | ✅ |
-| **Tasks** | |
-| Create / Edit / Delete tasks | ✅ |
-| Due date & time input | ✅ |
-| Status tracking (Pending → In Progress → Completed) | ✅ |
-| Task filtering by category | ✅ |
-| Search tasks by title / description / category | ✅ |
-| **Categories** | |
-| Create & delete categories | ✅ |
-| Category chip filtering on dashboard | ✅ |
-| **Calendar** | |
-| Monthly grid with task deadline markers | ✅ |
-| Color-coded task chips by status | ✅ |
-| Click-to-select day task sidebar | ✅ |
-| **Task Reminders** | |
-| Auto-generated deadline reminders | ✅ |
-| Severity levels: Overdue / Due Today / Due This Week | ✅ |
-| **Dashboard** | |
-| Welcome banner with today's task count | ✅ |
-| Stats row (Completed / Pending / In Progress / Total) | ✅ |
-| Categories sidebar + tasks list | ✅ |
-| **Profile** | |
-| Update name & email | ✅ |
-| Delete account (cascades all data) | ✅ |
-| **UI/UX** | |
-| Unified page headers across all views | ✅ |
-| Consistent sidebar branding | ✅ |
-| Hover effects & micro-animations | ✅ |
-| Responsive layout | ✅ |
-
-### Backend
-
-| Feature | Status |
-|---------|--------|
-| **Auth** | |
-| Registration & login endpoints | ✅ |
-| JWT generation & validation | ✅ |
-| BCrypt password hashing | ✅ |
-| **Tasks API** | |
-| CRUD endpoints | ✅ |
-| Status update endpoint | ✅ |
-| User-scoped task queries | ✅ |
-| **Categories API** | |
-| CRUD endpoints | ✅ |
-| Foreign key + constraint handling (PostgreSQL) | ✅ |
-| **User API** | |
-| Get / Update / Delete current user | ✅ |
-| Cascade delete for all user data | ✅ |
-| **Reminders API** | |
-| Real-time deadline reminder generation | ✅ |
-| Filtered by authenticated user | ✅ |
-| Excludes completed tasks | ✅ |
-| **Database** | |
-| Neon PostgreSQL integration | ✅ |
-| JPA/Hibernate ORM with auto DDL | ✅ |
-| Entity relationships & cascades | ✅ |
+| **Port 8080 in use** | Change `server.port` in `application.properties`. |
+| **`mvnw` permission denied** | Run `chmod +x mvnw` (Mac/Linux), then retry. |
+| **Frontend fails to start** | Ensure you ran `npm install` inside the `frontend/` directory first. |
+| **Backend connection refused** | Check your internet connection (Neon is a cloud DB). |
+| **CORS Errors** | Ensure the backend is actively running on port `8080`. |
