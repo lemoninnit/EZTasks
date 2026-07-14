@@ -4,7 +4,7 @@
 -- Just copy and paste this ENTIRE block into MySQL Workbench and click Execute
 -- ============================================
 
-USE claritask;
+USE eztasks;
 
 -- Step 1: Show me what constraints exist RIGHT NOW
 SHOW CREATE TABLE categories;

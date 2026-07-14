@@ -4,7 +4,7 @@
 -- IGNORE ANY ERRORS - just run all of it
 -- ============================================
 
-USE claritask;
+USE eztasks;
 
 -- Step 1: Show what indexes exist (so we can see what to remove)
 SHOW INDEX FROM categories;

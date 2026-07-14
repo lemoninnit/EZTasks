@@ -1,13 +1,66 @@
-.sidebar { border-right:1px solid #e5e7eb; padding:16px; background:#fff; display:flex; flex-direction:column; border-top-right-radius:16px; border-bottom-right-radius:16px; }
-.brandRow { display:flex; align-items:center; gap:8px; margin-bottom:16px; }
-.brandIcon { width:28px; height:28px; border-radius:999px; display:flex; align-items:center; justify-content:center; border:1px solid #cbd5e1; color:#2563eb; font-weight:800; }
-.brandText { font-weight:800; color:#0f172a; font-size:16px; }
-.nav { display:flex; flex-direction:column; gap:8px; }
-.link { display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:8px; color:#0f172a; }
-.link:hover { background:#f3f4f6; }
-.active { background:#3f5d2a; color:#fff; }
-.active:hover { background:#2d4420; }
-.section { margin-top:16px; padding-top:10px; border-top:1px solid #e5e7eb; }
-.sectionTitle { display:flex; align-items:center; gap:8px; color:#334155; padding:10px 12px; border-radius:8px; }
-.sectionContent { color:#64748b; padding:8px 12px; }
-.bottom { margin-top:auto; }
+.sidebar {
+  padding: 1rem;
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-shadow: var(--shadow-lg);
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem 0.25rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+  margin-bottom: 1rem;
+}
+
+.brandIcon {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.95);
+  color: var(--color-primary);
+  font-weight: 800;
+  box-shadow: var(--shadow-sm);
+}
+
+.brandText {
+  font-weight: 800;
+  color: #fff;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: 0.95rem;
+  color: rgba(255,255,255,0.92);
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.link:hover {
+  background: rgba(255,255,255,0.14);
+  transform: translateX(2px);
+}
+
+.active {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18);
+}
+

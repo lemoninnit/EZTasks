@@ -443,34 +443,7 @@ export default function Calendar() {
             textAlign: "center",
           }}
         >
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 56,
-            height: 56,
-            borderRadius: 16,
-            background: '#e6f4ea',
-            color: '#3f5d2a',
-            marginBottom: 16,
-            boxShadow: '0 4px 12px rgba(63, 93, 42, 0.1)'
-          }}>
-            <CalendarIcon size={28} />
-          </div>
-          <h1
-            style={{
-              fontWeight: 800,
-              fontSize: 32,
-              color: "#0f172a",
-              margin: "0 0 8px 0",
-              letterSpacing: '-0.02em'
-            }}
-          >
-            Calendar View
-          </h1>
-          <p style={{ color: "#64748b", margin: 0, fontSize: 15, fontWeight: 500 }}>
-            Track your tasks and deadlines with day-by-day density
-          </p>
+          
         </div>
 
         {/* =======================  

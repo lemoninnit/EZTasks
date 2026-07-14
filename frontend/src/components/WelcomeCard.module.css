@@ -1,0 +1,92 @@
+.card {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 60%, #213812 100%);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.orb {
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  pointer-events: none;
+}
+
+.orbOne {
+  top: -40%;
+  right: -10%;
+  width: 18rem;
+  height: 18rem;
+}
+
+.orbTwo {
+  bottom: -20%;
+  right: 18%;
+  width: 10rem;
+  height: 10rem;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.16);
+}
+
+.title {
+  margin: 0.55rem 0 0.35rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.subtitle {
+  margin: 0;
+  color: rgba(255,255,255,0.85);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.metric {
+  min-width: 6rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  background: rgba(255,255,255,0.12);
+}
+
+.metricValue {
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.metricLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.7);
+  margin-top: 0.25rem;
+}

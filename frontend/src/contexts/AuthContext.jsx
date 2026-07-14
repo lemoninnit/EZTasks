@@ -37,18 +37,10 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const register = async (name, email, password, role = 'student') => {
+  const register = async (name, email, password) => {
     try {
-      const response = await apiClient.post('/auth/register', { name, email, password, role })
-      const userData = response.data
-      // Backend returns { token, user: userDto }
-      const formatted = {
-        token: userData.token,
-        userDto: userData.user || userData.userDto
-      }
-      localStorage.setItem('ct_user', JSON.stringify(formatted))
-      setUser(formatted)
-      return { success: true, data: formatted }
+      await apiClient.post('/auth/register', { name, email, password })
+      return { success: true }
     } catch (error) {
       return { success: false, error: error.response?.data || 'Registration failed' }
     }

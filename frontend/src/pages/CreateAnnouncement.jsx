@@ -36,7 +36,7 @@ export default function CreateAnnouncement() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: 800, margin: '0 auto', padding: '24px' }}>
+      <div style={{ maxWidth: 840, margin: '0 auto', padding: '8px' }}>
         <div style={{ marginBottom: '24px' }}>
           <button
             onClick={() => navigate('/announcements')}
@@ -46,24 +46,26 @@ export default function CreateAnnouncement() {
               gap: '8px',
               background: 'none',
               border: 'none',
-              color: '#3b82f6',
+              color: '#4338ca',
               cursor: 'pointer',
               fontSize: '14px',
               marginBottom: '16px',
-              transition: 'all 0.2s'
+              transition: 'all 0.2s',
+              fontWeight: 700,
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateX(-4px)'
-              e.currentTarget.style.color = '#2563eb'
+              e.currentTarget.style.color = '#3730a3'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateX(0)'
-              e.currentTarget.style.color = '#3b82f6'
+              e.currentTarget.style.color = '#4338ca'
             }}
           >
             <ArrowLeft size={18} /> Back to Announcements
           </button>
           <h1 style={{ fontWeight: 800, fontSize: 28, color: '#0f172a' }}>Create Announcement</h1>
+          <p style={{ marginTop: 8, color: '#64748b', maxWidth: 640 }}>Share updates, reminders, or important details with your students and team.</p>
         </div>
 
         <Card>

@@ -1,69 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { motion } from 'framer-motion'
 import { CheckCircle2, Clock, Play, BarChart2 } from 'lucide-react'
+import styles from './StatsCardRow.module.css'
 
-const Metric = ({ color, bg, icon: Icon, value, label }) => {
-  const [isHovered, setIsHovered] = useState(false)
+const Metric = ({ color, bg, icon: Icon, value, label, delay }) => {
   return (
-    <div 
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        gap: 16, 
-        background: '#fff', 
-        border: '1px solid #e2e8f0', 
-        borderRadius: 16, 
-        padding: '20px 24px',
-        boxShadow: isHovered ? `0 10px 20px -5px ${color}15, 0 4px 6px -2px rgba(0,0,0,0.02)` : '0 1px 3px 0 rgba(0,0,0,0.05)',
-        transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
-        transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-        cursor: 'default'
-      }}
+    <motion.div
+      className={styles.metric}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.24 }}
+      whileHover={{ y: -4, scale: 1.01, boxShadow: '0 18px 35px rgba(15, 23, 42, 0.13)' }}
     >
-      <div style={{ 
-        width: 48, 
-        height: 48, 
-        borderRadius: 12, 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        background: bg,
-        transition: 'all 0.25s'
-      }}>
+      <div className={styles.iconWrap} style={{ background: bg }}>
         <Icon size={24} color={color} />
       </div>
-      <div style={{ flex: 1 }}>
-        <div style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', lineHeight: 1.1, marginBottom: 2 }}>
-          {value}
-        </div>
-        <div style={{ fontSize: 13, color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-          {label}
-        </div>
+      <div>
+        <div className={styles.value}>{value}</div>
+        <div className={styles.label}>{label}</div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
 export default function StatsCardRow({ completed = 0, pending = 0, inProgress = 0, total = 0 }) {
-  const [cols, setCols] = useState(4)
-  
-  useEffect(() => {
-    const apply = () => {
-      const w = window.innerWidth
-      setCols(w < 640 ? 1 : w < 1024 ? 2 : 4)
-    }
-    apply()
-    window.addEventListener('resize', apply)
-    return () => window.removeEventListener('resize', apply)
-  }, [])
-  
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: 16 }}>
-      <Metric color="#10b981" bg="#e6f4ea" icon={CheckCircle2} value={completed} label="Completed" />
-      <Metric color="#f59e0b" bg="#fef7e0" icon={Clock} value={pending} label="Pending" />
-      <Metric color="#3b82f6" bg="#e8f0fe" icon={Play} value={inProgress} label="In Progress" />
-      <Metric color="#8b5cf6" bg="#f3e8ff" icon={BarChart2} value={total} label="Total Tasks" />
+    <div className={styles.grid} style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+      <Metric color="#10b981" bg="#e6f4ea" icon={CheckCircle2} value={completed} label="Completed" delay={0.02} />
+      <Metric color="#f59e0b" bg="#fef7e0" icon={Clock} value={pending} label="Pending" delay={0.06} />
+      <Metric color="#3b82f6" bg="#e8f0fe" icon={Play} value={inProgress} label="In Progress" delay={0.1} />
+      <Metric color="#8b5cf6" bg="#f3e8ff" icon={BarChart2} value={total} label="Total Tasks" delay={0.14} />
     </div>
   )
 }

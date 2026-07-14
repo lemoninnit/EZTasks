@@ -1,3 +1,127 @@
-.item { padding:12px; border:1px solid #e5e7eb; border-radius:8px; background:#fff; }
-.title { font-weight:600; }
-.meta { color:#6b7280; }
+.item {
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.itemCompleted {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(255, 255, 255, 0.96));
+  border-color: rgba(16, 185, 129, 0.24);
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.contentColumn {
+  flex: 1;
+  min-width: 0;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.45rem;
+}
+
+.title {
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.completedTitle {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.description {
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  margin: 0 0 0.7rem;
+  line-height: 1.5;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.84rem;
+  color: var(--color-text-muted);
+}
+
+.categoryChip {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(63, 93, 42, 0.08);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.statusPill {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.pendingPill {
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563eb;
+}
+
+.progressPill {
+  background: rgba(245, 158, 11, 0.16);
+  color: #b45309;
+}
+
+.completedPill {
+  background: rgba(16, 185, 129, 0.16);
+  color: #047857;
+}
+
+.actions {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.actionButton {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.actionButton:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.actionButtonPrimary {
+  border-color: #bfdbfe;
+  color: #2563eb;
+}
+
+.actionButtonSuccess {
+  border-color: #bbf7d0;
+  color: #047857;
+}
+
+.actionButtonDanger {
+  border-color: #fecaca;
+  color: #dc2626;
+}

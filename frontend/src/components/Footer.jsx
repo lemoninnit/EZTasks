@@ -1,72 +1,51 @@
 import React from 'react'
 import { Twitter, Instagram, Youtube, Linkedin } from 'lucide-react'
 
-const columns = [
+const footerColumns = [
   {
-    title: 'Use cases',
-    links: [
-      { label: 'Student task tracking' },
-      { label: 'Assignment planning' },
-      { label: 'Teacher announcements' },
-      { label: 'Deadlines & reminders' },
-      { label: 'Class communication' },
-      { label: 'Task status (pending/completed)' },
-    ],
+    title: 'Product',
+    links: ['Features', 'Pricing', 'Security'],
   },
   {
-    title: 'Explore',
-    links: [
-      { label: 'Task creation & editing' },
-      { label: 'Announcement posting' },
-      { label: 'Filters & search' },
-      { label: 'Responsive UI' },
-      { label: 'Secure data storage' },
-      { label: 'Notifications' },
-    ],
+    title: 'Company',
+    links: ['About', 'Blog', 'Careers'],
   },
   {
     title: 'Resources',
-    links: [
-      { label: 'User manual' },
-      { label: 'Best practices' },
-      { label: 'Support' },
-      { label: 'Developers' },
-      { label: 'Resource library' },
-    ],
+    links: ['Documentation', 'API', 'Support'],
+  },
+  {
+    title: 'Legal',
+    links: ['Privacy', 'Terms', 'Cookies'],
   },
 ]
 
 export default function Footer() {
   const s = {
-    footer: { borderTop:'1px solid #e5e7eb', padding:'24px 20px', background:'#fff' },
-    socialRow: { maxWidth:1100, margin:'0 auto 16px', display:'flex', gap:10 },
-    social: { display:'inline-flex', alignItems:'center', justifyContent:'center', width:28, height:28, border:'1px solid #e5e7eb', borderRadius:999, color:'#374151', fontSize:12 },
-    columns: { maxWidth:1100, margin:'0 auto', display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:24 },
-    column: {},
-    colTitle: { fontWeight:600, color:'#111827', marginBottom:8 },
-    list: { listStyle:'none', padding:0, margin:0 },
-    listItem: { margin:'6px 0' },
-    link: { color:'#374151' },
+    footer: { background: '#05050f', color: '#f8fafc', padding: '80px 24px 24px', fontSize: 14, borderTop: '1px solid rgba(255,255,255,0.05)' },
+    container: { maxWidth: 1000, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32 },
+    column: { display: 'grid', gap: 16, alignContent: 'start' },
+    colTitle: { fontWeight: 700, color: '#ffffff', fontSize: 15, marginBottom: 4 },
+    link: { color: 'rgba(255,255,255,0.6)', textDecoration: 'none', transition: 'color 0.2s', fontSize: 14 },
+    bottom: { maxWidth: 1000, margin: '64px auto 0', borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: 32, paddingBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16, color: 'rgba(255,255,255,0.4)' },
+    brandLogo: { textDecoration: 'none', fontSize: 18, fontWeight: 800, letterSpacing: '-0.03em' },
   }
+
   return (
     <footer style={s.footer}>
-      <div style={s.socialRow}>
-        <a style={s.social} href="#" aria-label="Twitter"><Twitter size={16} /></a>
-        <a style={s.social} href="#" aria-label="Instagram"><Instagram size={16} /></a>
-        <a style={s.social} href="#" aria-label="YouTube"><Youtube size={16} /></a>
-        <a style={s.social} href="#" aria-label="LinkedIn"><Linkedin size={16} /></a>
-      </div>
-      <div style={s.columns}>
-        {columns.map((col) => (
-          <div key={col.title} style={s.column}>
-            <div style={s.colTitle}>{col.title}</div>
-            <ul style={s.list}>
-              {col.links.map((l) => (
-                <li key={l.label} style={s.listItem}><a href="#" style={s.link}>{l.label}</a></li>
-              ))}
-            </ul>
+      <div style={s.container}>
+        {footerColumns.map((column) => (
+          <div key={column.title} style={s.column}>
+            <div style={s.colTitle}>{column.title}</div>
+            {column.links.map((label) => (
+              <a key={label} href="#" style={s.link}>{label}</a>
+            ))}
           </div>
         ))}
+      </div>
+      <div style={s.bottom}>
+        <a href="/" style={{ ...s.brandLogo, background: 'linear-gradient(90deg, #22d3ee 0%, #c084fc 100%)', WebkitBackgroundClip: 'text', color: 'transparent' }}>EZTasks</a>
+        <span>© 2025 EZTasks. All rights reserved.</span>
       </div>
     </footer>
   )

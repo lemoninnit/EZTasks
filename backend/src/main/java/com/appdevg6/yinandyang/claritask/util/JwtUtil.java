@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
-    @Value("${jwt.secret:claritask-secret-key-for-jwt-token-generation-minimum-256-bits}")
+    @Value("${jwt.secret:eztasks-secret-key-for-jwt-token-generation-minimum-256-bits}")
     private String secret;
 
     @Value("${jwt.expiration:86400000}") // 24 hours

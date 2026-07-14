@@ -4,13 +4,13 @@
 -- This script fixes the bug where different users can't create categories with the same name
 -- 
 -- INSTRUCTIONS:
--- 1. Make sure you're connected to the 'claritask' database
+-- 1. Make sure you're connected to the 'eztasks' database
 -- 2. Copy and paste ALL the SQL commands below into MySQL Workbench
 -- 3. Click the Execute button (lightning bolt icon)
 -- 4. If you see any errors, that's okay - just continue
 -- ============================================
 
-USE claritask;
+USE eztasks;
 
 -- Step 1: First, let's see what constraints currently exist
 -- (This helps us understand what needs to be fixed)

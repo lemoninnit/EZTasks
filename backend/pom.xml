@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
     <groupId>com.appdevg6.yinandyang</groupId>
-    <artifactId>claritask</artifactId>
+    <artifactId>eztasks</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-    <name>claritask</name>
-    <description>ClariTask backend service</description>
+    <name>eztasks</name>
+    <description>EZTasks backend service</description>
 	<url/>
 	<licenses>
 		<license/>

@@ -79,18 +79,17 @@ export default function Profile() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: 24 }}>
-        {/* Page Header */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      <div style={{ maxWidth: 940, margin: '0 auto', padding: '8px', display: 'flex', flexDirection: 'column', gap: 24 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '8px 2px' }}>
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
-            width: 48,
-            height: 48,
-            borderRadius: 14,
-            background: 'linear-gradient(135deg, #3f5d2a, #2d4a1b)',
-            boxShadow: '0 4px 12px rgba(63, 93, 42, 0.25)'
+            width: 50,
+            height: 50,
+            borderRadius: 16,
+            background: 'linear-gradient(135deg, #4f46e5, #7c3aed)',
+            boxShadow: '0 12px 32px rgba(79, 70, 229, 0.22)'
           }}>
             <UserCircle size={22} color="#fff" />
           </div>
@@ -99,7 +98,7 @@ export default function Profile() {
               Profile
             </h1>
             <p style={{ fontSize: 14, color: '#64748b', margin: 0, fontWeight: 500 }}>
-              Manage your account settings
+              Fine-tune your account and keep your workspace personal.
             </p>
           </div>
         </div>

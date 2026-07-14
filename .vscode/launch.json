@@ -6,10 +6,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "ClariTaskApplication",
+            "name": "EZTasksApplication",
             "request": "launch",
             "mainClass": "com.appdevg6.yinandyang.claritask.ClariTaskApplication",
-            "projectName": "claritask"
+            "projectName": "eztasks"
         },
         {
             "type": "java",
@@ -19,10 +19,10 @@
         },
         {
             "type": "java",
-            "name": "ClariTaskApplication",
+            "name": "EZTasksApplication",
             "request": "launch",
             "mainClass": "com.appdev.yin.yang.claritask.ClariTaskApplication",
-            "projectName": "claritask"
+            "projectName": "eztasks"
         }
     ]
 }

@@ -1,0 +1,23 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.empty {
+  text-align: center;
+  padding: 2.4rem 1.5rem;
+  color: var(--color-text-muted);
+}
+
+.iconWrap {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 1rem;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(63, 93, 42, 0.08);
+  color: var(--color-primary);
+}

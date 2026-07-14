@@ -1,4 +1,4 @@
-# ClariTask
+# EZTasks
 
 **School Task & Reminder Manager** — A full-stack web application for managing tasks, deadlines, and smart task-deadline reminders.
 
@@ -21,8 +21,8 @@
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/lemoninnit/ClariTask.git
-cd ClariTask
+git clone https://github.com/lemoninnit/EZTasks.git
+cd EZTasks
 ```
 
 ---
@@ -103,7 +103,7 @@ The React app will start at: **`http://localhost:3000`**
 ## 📁 Project Structure
 
 ```
-ClariTask/
+EZTasks/
 ├── backend/                        # Spring Boot 3 REST API (Java 17)
 │   ├── src/main/java/              # Controllers, Services, Entities
 │   └── src/main/resources/

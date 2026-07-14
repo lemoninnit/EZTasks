@@ -5,7 +5,7 @@ EASIEST FIX - JUST COPY AND PASTE THIS
 Open MySQL Workbench, click on a new SQL tab (or File > New Query Tab),
 then copy and paste this ENTIRE block:
 
-USE claritask;
+USE eztasks;
 ALTER TABLE categories DROP INDEX name;
 ALTER TABLE categories DROP INDEX UK_categories_name;
 ALTER TABLE categories ADD CONSTRAINT UK_categories_user_name UNIQUE (user_id, name);
