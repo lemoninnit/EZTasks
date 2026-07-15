@@ -30,3 +30,7 @@ The React app will launch instantly. Check your terminal for the URL (usually **
 1. Open the frontend URL in your browser.
 2. Experience the scroll-animated landing page.
 3. Click **Start Free Trial** to create an account, log in, and explore the Dashboard, Calendar, and Tasks features.
+
+## 🌐 Deployment (Render)
+
+This application is ready for production and configured for deployment on [Render]([https://inkprinta.onrender.com](https://eztasks-frontend.onrender.com/)).
