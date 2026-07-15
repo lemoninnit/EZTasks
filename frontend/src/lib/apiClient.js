@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://eztasks.onrender.com/api',
+  baseURL: import.meta.env.VITE_API_URL || 'https://eztasks-backend.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
