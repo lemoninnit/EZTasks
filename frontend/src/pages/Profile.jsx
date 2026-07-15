@@ -69,14 +69,6 @@ export default function Profile() {
   const userName = user?.userDto?.name || user?.name || 'User'
   const userEmail = user?.userDto?.email || user?.email || ''
 
-  if (!user) {
-    return (
-      <AppLayout>
-        <div style={{ padding: '24px', textAlign: 'center' }}>Loading...</div>
-      </AppLayout>
-    )
-  }
-
   return (
     <AppLayout>
       <div style={{ maxWidth: 940, margin: '0 auto', padding: '8px', display: 'flex', flexDirection: 'column', gap: 24 }}>

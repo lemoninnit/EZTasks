@@ -1,0 +1,114 @@
+/* ============================================================
+   Landing.css – Responsive overrides for Landing.jsx
+   All rules use !important to override inline style props.
+   ============================================================ */
+
+/* ── Tablet (≤ 1024px) ─────────────────────────────────── */
+@media (max-width: 1024px) {
+  .lp-bento-container {
+    grid-template-columns: 1fr !important;
+    max-width: 680px !important;
+  }
+  .lp-bento-large {
+    grid-column: auto !important;
+  }
+}
+
+/* ── Mobile landscape / large mobile (≤ 768px) ─────────── */
+@media (max-width: 768px) {
+  /* Hero */
+  .lp-hero-section {
+    padding: 100px 20px 0 !important;
+  }
+  .lp-hero-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .lp-hero-actions a {
+    width: 100%;
+  }
+  .lp-hero-actions a button,
+  .lp-hero-actions > a > * {
+    width: 100% !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Visual demo card — hide to save vertical space */
+  .lp-visual-card {
+    display: none !important;
+  }
+
+  /* Features */
+  .lp-features-section {
+    padding: 72px 20px !important;
+  }
+  .lp-bento-container {
+    grid-template-columns: 1fr !important;
+    max-width: 100% !important;
+  }
+  .lp-bento-large {
+    grid-column: auto !important;
+    padding: 32px !important;
+  }
+  .lp-bento-small {
+    padding: 32px !important;
+  }
+
+  /* Principles – scroll track */
+  .lp-principles-section {
+    height: 220vh !important;
+  }
+  .lp-sticky-container {
+    padding: 0 20px !important;
+  }
+  .lp-card-deck {
+    max-width: 100% !important;
+    height: 380px !important;
+  }
+  .lp-deck-card {
+    padding: 24px 28px !important;
+    gap: 20px !important;
+    border-radius: 18px !important;
+  }
+
+  /* CTA */
+  .lp-cta-section {
+    padding: 80px 20px !important;
+  }
+}
+
+/* ── Small mobile (≤ 480px) ────────────────────────────── */
+@media (max-width: 480px) {
+  .lp-hero-section {
+    padding: 90px 16px 0 !important;
+  }
+  .lp-features-section {
+    padding: 60px 16px !important;
+  }
+  .lp-bento-large {
+    padding: 24px !important;
+  }
+  .lp-bento-small {
+    padding: 24px !important;
+  }
+  .lp-sticky-container {
+    padding: 0 16px !important;
+  }
+  .lp-card-deck {
+    height: 340px !important;
+  }
+  .lp-deck-card {
+    padding: 20px 20px !important;
+    gap: 14px !important;
+    flex-direction: column !important;
+    border-radius: 14px !important;
+  }
+  .lp-cta-section {
+    padding: 60px 16px !important;
+  }
+  .lp-principles-section {
+    height: 240vh !important;
+  }
+}

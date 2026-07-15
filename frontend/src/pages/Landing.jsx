@@ -1,10 +1,11 @@
-import React from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import React, { useRef } from 'react'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import SiteLayout from '../layouts/SiteLayout'
 import Button from '../components/Button'
 import Card from '../components/Card'
 import TextTicker from '../components/TextTicker'
 import { ArrowRight, Sparkles, Calendar, Zap, BarChart2 } from 'lucide-react'
+import './Landing.css'
 
 const principles = [
   { number: '01', title: 'Speed is Everything', description: 'Tasks move fast. Your tools should move faster. Zero lag, infinite scale.' },
@@ -17,6 +18,37 @@ const principles = [
 export default function Landing() {
   const { scrollY } = useScroll()
   const heroOpacity = useTransform(scrollY, [0, 400, 800], [1, 0.5, 0])
+
+  const principlesContainerRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: principlesContainerRef,
+    offset: ["start start", "end end"]
+  })
+
+  // Smooth scroll progress — slower / more fluid spring physics
+  const smoothProgress = useSpring(scrollYProgress, {
+    damping: 28,
+    stiffness: 55,
+    mass: 0.6
+  })
+
+  // Card 0 — entrance: slides up + fades in via whileInView; then scales/blurs as others stack
+  const scale0 = useTransform(smoothProgress, [0.10, 0.28, 0.40, 0.52, 0.65, 0.78], [1.0, 0.97, 0.97, 0.93, 0.93, 0.89])
+  const blur0  = useTransform(smoothProgress, [0.10, 0.28, 0.40, 0.52, 0.65, 0.78], ['blur(0px)', 'blur(0.8px)', 'blur(0.8px)', 'blur(1.8px)', 'blur(1.8px)', 'blur(2.5px)'])
+
+  // Card 1 — starts 120vh below viewport, slides up slowly, then scales down
+  const y1     = useTransform(smoothProgress, [0, 0.12, 0.28], ['120vh', '120vh', '0px'])
+  const scale1 = useTransform(smoothProgress, [0.40, 0.52, 0.65, 0.78], [1.0, 0.97, 0.97, 0.93])
+  const blur1  = useTransform(smoothProgress, [0.40, 0.52, 0.65, 0.78], ['blur(0px)', 'blur(0.8px)', 'blur(0.8px)', 'blur(1.8px)'])
+
+  // Card 2 — holds until card 1 fully settles, then slides up
+  const y2     = useTransform(smoothProgress, [0, 0.35, 0.50], ['120vh', '120vh', '0px'])
+  const scale2 = useTransform(smoothProgress, [0.65, 0.78], [1.0, 0.97])
+  const blur2  = useTransform(smoothProgress, [0.65, 0.78], ['blur(0px)', 'blur(0.8px)'])
+
+  // Card 3 — slides in last, finishes at 0.78 so from 0.78 to 1.0 it just pauses.
+  const y3     = useTransform(smoothProgress, [0, 0.60, 0.78], ['120vh', '120vh', '0px'])
+
 
   const s = {
     heroSection: {
@@ -211,25 +243,6 @@ export default function Landing() {
       borderRadius: 999,
       flex: 1,
     },
-    principlesSection: {
-      padding: '120px 24px',
-      background: '#030308',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    principlesList: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 48,
-      maxWidth: 600,
-      width: '100%',
-    },
-    principleRow: {
-      display: 'flex',
-      gap: 32,
-      alignItems: 'flex-start',
-    },
     principleNumber: {
       fontSize: 'clamp(3rem, 5vw, 4rem)',
       fontWeight: 800,
@@ -249,6 +262,7 @@ export default function Landing() {
       lineHeight: 1.6,
       fontSize: 16,
     },
+
     ctaSection: {
       padding: '120px 24px',
       background: '#05050f',
@@ -279,11 +293,56 @@ export default function Landing() {
       color: 'rgba(255, 255, 255, 0.4)',
       fontSize: 13,
     },
+    principlesSection: {
+      position: 'relative',
+      height: '200vh',
+      background: '#030308',
+      width: '100%',
+    },
+    stickyContainer: {
+      position: 'sticky',
+      top: 0,
+      height: '100vh',
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+      padding: '0 24px',
+      boxSizing: 'border-box',
+    },
+    headerWrap: {
+      textAlign: 'center',
+      marginBottom: '60px',
+    },
+    cardDeck: {
+      position: 'relative',
+      width: '100%',
+      maxWidth: '850px',
+      height: '420px',
+      margin: '0 auto',
+    },
+    deckCard: {
+      position: 'absolute',
+      left: 0,
+      width: '100%',
+      background: '#09091a',
+      border: '1px solid rgba(255, 255, 255, 0.08)',
+      borderRadius: '24px',
+      padding: '32px 40px',
+      boxShadow: '0 -15px 30px rgba(0, 0, 0, 0.5), 0 20px 40px rgba(0, 0, 0, 0.3)',
+      boxSizing: 'border-box',
+      display: 'flex',
+      gap: '32px',
+      alignItems: 'flex-start',
+      transformOrigin: 'top center',
+    }
   }
 
   return (
     <SiteLayout>
-      <section style={s.heroSection}>
+      <section style={s.heroSection} className="lp-hero-section">
         <div style={s.heroGlow} />
         <motion.div style={{ ...s.heroWrap, opacity: heroOpacity }}>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}>
@@ -298,7 +357,7 @@ export default function Landing() {
             <p style={s.heroText}>
               The only task tracker that moves as fast as your team thinks. Precision-engineered for deadlines that matter.
             </p>
-            <div style={s.heroActions}>
+            <div style={s.heroActions} className="lp-hero-actions">
               <a href="/signup" style={{ textDecoration: 'none' }}>
                 <Button style={{ padding: '12px 24px', background: '#06b6d4', color: '#020617', fontWeight: 600, border: 'none', borderRadius: 6, fontSize: 15 }}>
                   Start Free Trial <ArrowRight size={16} style={{ marginLeft: 6 }} />
@@ -327,8 +386,9 @@ export default function Landing() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
             style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: 60 }}
+            className="lp-visual-card-wrapper"
           >
-            <div style={s.visualCard}>
+            <div style={s.visualCard} className="lp-visual-card">
               <div style={s.visualTop}>
                 <div style={{ display: 'flex', gap: 6 }}>
                   <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ef4444' }} />
@@ -360,15 +420,15 @@ export default function Landing() {
       </section>
       <TextTicker />
 
-      <section id="features" style={s.section}>
+      <section id="features" style={s.section} className="lp-features-section">
         <div>
           <h2 style={s.sectionHeading}>
             Built for <span style={s.heroAccent}>Precision</span>
           </h2>
           <p style={s.sectionSub}>Every feature engineered to eliminate friction and amplify productivity.</p>
         </div>
-        <div style={s.bentoContainer}>
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} style={s.bentoLarge}>
+        <div style={s.bentoContainer} className="lp-bento-container">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} style={s.bentoLarge} className="lp-bento-large">
             <div style={s.bentoIcon}><Calendar size={24} /></div>
             <h3 style={s.bentoTitle}>Dynamic Timeline</h3>
             <p style={s.bentoDesc}>Visualize every task in motion. Real-time progression tracking with precision.</p>
@@ -379,7 +439,7 @@ export default function Landing() {
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.15 }} style={{ ...s.bentoSmall, background: 'linear-gradient(180deg, rgba(168, 85, 247, 0.05) 0%, rgba(10, 15, 30, 0.6) 100%)' }}>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.15 }} style={{ ...s.bentoSmall, background: 'linear-gradient(180deg, rgba(168, 85, 247, 0.05) 0%, rgba(10, 15, 30, 0.6) 100%)' }} className="lp-bento-small">
             <div style={{ ...s.bentoIcon, color: '#a855f7' }}><Zap size={24} /></div>
             <h3 style={s.bentoTitle}>Smart Deadlines</h3>
             <p style={s.bentoDesc}>Never miss a beat. AI-powered deadline reminders that adapt to your workflow.</p>
@@ -390,7 +450,7 @@ export default function Landing() {
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }} style={{ ...s.bentoSmall, background: 'linear-gradient(180deg, rgba(20, 184, 166, 0.05) 0%, rgba(10, 15, 30, 0.6) 100%)' }}>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }} style={{ ...s.bentoSmall, background: 'linear-gradient(180deg, rgba(20, 184, 166, 0.05) 0%, rgba(10, 15, 30, 0.6) 100%)' }} className="lp-bento-small">
             <div style={{ ...s.bentoIcon, color: '#14b8a6' }}><BarChart2 size={24} /></div>
             <h3 style={s.bentoTitle}>Assignment Analytics</h3>
             <p style={s.bentoDesc}>Deep insights into team performance. Track, measure, optimize.</p>
@@ -403,32 +463,95 @@ export default function Landing() {
         </div>
       </section>
 
-      <section id="manifesto" style={s.principlesSection}>
-        <div style={{ textAlign: 'left', marginBottom: 64, maxWidth: 600, width: '100%' }}>
-          <h2 style={{ ...s.sectionHeading, textAlign: 'left', margin: '0 0 12px' }}>Our Principles</h2>
-          <p style={{ ...s.sectionSub, textAlign: 'left', margin: 0 }}>The philosophy behind every decision.</p>
-        </div>
-        <div style={s.principlesList}>
-          {principles.map((item, index) => (
+      <section id="manifesto" ref={principlesContainerRef} style={s.principlesSection} className="lp-principles-section">
+        <div style={s.stickyContainer} className="lp-sticky-container">
+          <div style={s.headerWrap}>
+            <h2 style={{ ...s.sectionHeading, margin: '0 0 12px' }}>Our Principles</h2>
+            <p style={{ ...s.sectionSub, margin: 0 }}>The philosophy behind every decision.</p>
+          </div>
+          
+          <div style={s.cardDeck} className="lp-card-deck">
+            {/* Card 0 — entrance: slides up + fades in when section enters viewport */}
             <motion.div
-              key={item.number}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.15 * index }}
-              style={s.principleRow}
+              initial={{ y: 70, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                ...s.deckCard,
+                top: '0px',
+                scale: scale0,
+                filter: blur0,
+                zIndex: 0
+              }}
+              className="lp-deck-card"
             >
-              <div style={s.principleNumber}>{item.number}</div>
+              <div style={s.principleNumber}>{principles[0].number}</div>
               <div>
-                <h3 style={s.principleTitle}>{item.title}</h3>
-                <p style={s.principleDesc}>{item.description}</p>
+                <h3 style={s.principleTitle}>{principles[0].title}</h3>
+                <p style={s.principleDesc}>{principles[0].description}</p>
               </div>
             </motion.div>
-          ))}
+
+            {/* Card 1 */}
+            <motion.div
+              style={{
+                ...s.deckCard,
+                top: '35px',
+                y: y1,
+                scale: scale1,
+                filter: blur1,
+                zIndex: 1
+              }}
+              className="lp-deck-card"
+            >
+              <div style={s.principleNumber}>{principles[1].number}</div>
+              <div>
+                <h3 style={s.principleTitle}>{principles[1].title}</h3>
+                <p style={s.principleDesc}>{principles[1].description}</p>
+              </div>
+            </motion.div>
+
+            {/* Card 2 */}
+            <motion.div
+              style={{
+                ...s.deckCard,
+                top: '70px',
+                y: y2,
+                scale: scale2,
+                filter: blur2,
+                zIndex: 2
+              }}
+              className="lp-deck-card"
+            >
+              <div style={s.principleNumber}>{principles[2].number}</div>
+              <div>
+                <h3 style={s.principleTitle}>{principles[2].title}</h3>
+                <p style={s.principleDesc}>{principles[2].description}</p>
+              </div>
+            </motion.div>
+
+            {/* Card 3 */}
+            <motion.div
+              style={{
+                ...s.deckCard,
+                top: '105px',
+                y: y3,
+                zIndex: 3
+              }}
+              className="lp-deck-card"
+            >
+              <div style={s.principleNumber}>{principles[3].number}</div>
+              <div>
+                <h3 style={s.principleTitle}>{principles[3].title}</h3>
+                <p style={s.principleDesc}>{principles[3].description}</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      <section style={s.ctaSection}>
+      <section style={s.ctaSection} className="lp-cta-section">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}>
           <h2 style={s.ctaTitle}>
             Ready to <span style={s.ctaAccent}>Transform</span><br />

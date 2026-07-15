@@ -120,19 +120,7 @@ export default function Dashboard() {
     setTasks(prev => prev.map(t => t.taskId === taskId ? { ...t, status: nextStatus } : t))
   }
 
-  if (loading) {
-    return (
-      <AppLayout>
-        <div className={styles.loadingShell}>
-          <motion.div className={styles.loadingCard} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="loading-skeleton" style={{ width: '45%', height: 20, borderRadius: 999 }} />
-            <div className="loading-skeleton" style={{ width: '100%', height: 132, borderRadius: 24 }} />
-            <div className="loading-skeleton" style={{ width: '100%', height: 84, borderRadius: 20 }} />
-          </motion.div>
-        </div>
-      </AppLayout>
-    )
-  }
+
 
   return (
     <AppLayout>

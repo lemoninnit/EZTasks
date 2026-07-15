@@ -33,7 +33,13 @@ export const AuthProvider = ({ children }) => {
       setUser(formatted)
       return { success: true, data: formatted }
     } catch (error) {
-      return { success: false, error: error.response?.data || 'Invalid credentials' }
+      const data = error.response?.data
+      // Backend may return a plain string, { message }, or { error } — normalise to string
+      const message =
+        typeof data === 'string'
+          ? data
+          : data?.message || data?.error || 'Invalid email or password'
+      return { success: false, error: message }
     }
   }
 

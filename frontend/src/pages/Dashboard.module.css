@@ -21,9 +21,9 @@
   gap: 1rem;
   padding: 1.5rem;
   border-radius: 1.4rem;
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: rgba(10, 15, 30, 0.6);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .header {
@@ -47,21 +47,21 @@
   width: 3rem;
   height: 3rem;
   border-radius: 1rem;
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-strong));
-  color: white;
-  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, rgba(34,211,238,0.1), rgba(192,132,252,0.1));
+  color: #22d3ee;
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
 .title {
   font-size: 1.65rem;
   font-weight: 800;
-  color: var(--color-text);
+  color: #fff;
   margin: 0;
 }
 
 .subtitle {
   font-size: 0.95rem;
-  color: var(--color-muted);
+  color: rgba(255,255,255,0.6);
   margin: 0.2rem 0 0;
 }
 

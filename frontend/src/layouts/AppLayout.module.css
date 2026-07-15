@@ -1,7 +1,8 @@
 .shell {
   display: grid;
   min-height: 100vh;
-  background: linear-gradient(140deg, #f8fbff 0%, #f5f8ff 45%, #eef4ff 100%);
+  background: linear-gradient(180deg, #05050f 0%, #0a0a1a 100%);
+  color: #f8fafc;
 }
 
 .content {
@@ -11,8 +12,8 @@
 }
 
 .header {
-  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
-  background: rgba(255, 255, 255, 0.84);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(10, 15, 30, 0.6);
   backdrop-filter: blur(20px);
   position: sticky;
   top: 0;
@@ -20,7 +21,6 @@
   min-height: 4.75rem;
   display: flex;
   align-items: center;
-  box-shadow: 0 1px 0 rgba(226, 232, 240, 0.5);
 }
 
 .headerInner {
@@ -35,7 +35,7 @@
 
 .greeting {
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.95rem;
   display: flex;
   align-items: center;
@@ -43,7 +43,7 @@
 }
 
 .greetingStrong {
-  color: var(--color-text);
+  color: #fff;
   font-weight: 800;
 }
 
@@ -60,24 +60,23 @@
   gap: 0.5rem;
   padding: 0.65rem 0.95rem;
   border-radius: 999px;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  background: var(--color-surface);
-  color: var(--color-text);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
+  transition: background 0.2s;
 }
 
 .profileButton:hover,
 .logoutButton:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .avatar {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  background: linear-gradient(90deg, #22d3ee 0%, #c084fc 100%);
   color: #fff;
   display: flex;
   align-items: center;

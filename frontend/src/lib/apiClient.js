@@ -25,8 +25,13 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      localStorage.removeItem('ct_user')
-      window.location.href = '/login'
+      // Don't redirect on auth endpoints — login/signup handle their own 401 errors
+      const url = error.config?.url || ''
+      const isAuthEndpoint = url.includes('/auth/login') || url.includes('/auth/register')
+      if (!isAuthEndpoint) {
+        localStorage.removeItem('ct_user')
+        window.location.href = '/login'
+      }
     }
     return Promise.reject(error)
   }

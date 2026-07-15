@@ -7,7 +7,7 @@
 .empty {
   text-align: center;
   padding: 2.4rem 1.5rem;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .iconWrap {
@@ -19,5 +19,5 @@
   align-items: center;
   justify-content: center;
   background: rgba(63, 93, 42, 0.08);
-  color: var(--color-primary);
+  color: #c084fc;
 }

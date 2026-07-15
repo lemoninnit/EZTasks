@@ -84,7 +84,7 @@ export default function AuthLayout({ title, subtitle, children }) {
           {children}
         </div>
       </main>
-      <Footer />
+      <Footer minimal />
     </div>
   )
 }

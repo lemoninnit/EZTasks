@@ -265,13 +265,7 @@ export default function Tasks() {
           )}
         </AnimatePresence>
 
-        {loading ? (
-          <div className={styles.empty}>
-            <div className="loading-skeleton" style={{ width: '100%', height: 90, borderRadius: 16, marginBottom: 12 }} />
-            <div className="loading-skeleton" style={{ width: '70%', height: 16, borderRadius: 999, margin: '0 auto 8px' }} />
-            <div className="loading-skeleton" style={{ width: '45%', height: 16, borderRadius: 999, margin: '0 auto' }} />
-          </div>
-        ) : filteredTasks.length === 0 ? (
+        {filteredTasks.length === 0 ? (
           <div className={styles.empty}>
             <div className={styles.emptyIcon}><ListTodo size={24} /></div>
             <p style={{ margin: '0 0 0.3rem', color: 'var(--color-text)' }}>{searchTerm ? 'No tasks match your search.' : 'No tasks yet. Create your first task to get started.'}</p>

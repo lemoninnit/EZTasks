@@ -93,19 +93,6 @@ export default function Announcements() {
     }
   }
 
-  if (loading) {
-    return (
-      <AppLayout>
-        <div className={styles.page}>
-          <div className={styles.empty}>
-            <div className="loading-skeleton" style={{ width: '100%', height: 90, borderRadius: 16, marginBottom: 12 }} />
-            <div className="loading-skeleton" style={{ width: '70%', height: 16, borderRadius: 999, margin: '0 auto 8px' }} />
-            <div className="loading-skeleton" style={{ width: '45%', height: 16, borderRadius: 999, margin: '0 auto' }} />
-          </div>
-        </div>
-      </AppLayout>
-    )
-  }
 
   return (
     <AppLayout>

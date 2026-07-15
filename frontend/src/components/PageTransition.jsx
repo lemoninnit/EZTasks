@@ -53,11 +53,11 @@ function LoadingOverlay() {
 }
 
 export default function PageTransition({ children }) {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     // Show loader briefly on mount, then reveal content
-    const t = setTimeout(() => setLoading(false), 380)
+    const t = setTimeout(() => setLoading(false), 0)
     return () => clearTimeout(t)
   }, [])
 
