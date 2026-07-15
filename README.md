@@ -33,4 +33,4 @@ The React app will launch instantly. Check your terminal for the URL (usually **
 
 ## 🌐 Deployment (Render)
 
-This application is ready for production and configured for deployment on [Render]([https://inkprinta.onrender.com](https://eztasks-frontend.onrender.com/)).
+This application is ready for production and configured for deployment on [Render]((https://eztasks-frontend.onrender.com/)).
